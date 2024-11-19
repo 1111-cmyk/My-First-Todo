@@ -73,7 +73,7 @@ _(Optional: Include screenshots or a GIF to showcase the app’s functionality.)
 
 ```
 /components   - Reusable React components
-/pages        - Next.js pages (includes SSR logic)
+/app        - Next.js pages (includes SSR logic)
 /styles       - Tailwind CSS styles
 ```
 
