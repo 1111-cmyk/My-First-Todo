@@ -32,30 +32,12 @@ Ensure you have **Node.js** installed. Then, run:
 npm install
 ```
 
-### 3. Set Up Firebase
 
-- Go to the [Firebase Console](https://console.firebase.google.com/).
-- Create a new Firebase project (if you don’t already have one).
-- Enable **Firestore** in your Firebase project.
-- Navigate to **Project Settings > Service Accounts**, and generate a new private key.
-- Download the `firebase.json` file or follow the Firebase setup instructions.
-
-### 4. Configure Firebase in Your Project
-
-Create a `.env.local` file in the root directory of the project and add your Firebase credentials:
-
-```bash
-NEXT_PUBLIC_FIREBASE_API_KEY=YOUR_API_KEY
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=YOUR_AUTH_DOMAIN
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=YOUR_PROJECT_ID
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=YOUR_STORAGE_BUCKET
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=YOUR_SENDER_ID
-NEXT_PUBLIC_FIREBASE_APP_ID=YOUR_APP_ID
 ```
 
-> Replace `YOUR_*` with the actual values from the Firebase Console under **Project Settings > General > Your Apps**.
 
-### 5. Run the Development Server
+
+### 3. Run the Development Server
 
 Start the app by running:
 
