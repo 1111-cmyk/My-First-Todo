@@ -111,6 +111,7 @@ function ClientApp() {
               <div className="w-full h-[300px] my-5 flex items-center justify-center">
                 {" "}
                 <AiOutlineLoading className="text-5xl text-green-500" />
+                <p className="text-gray-600">Loading...</p>{" "}
               </div>{" "}
             </>
           ) : (
