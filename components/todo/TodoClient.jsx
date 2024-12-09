@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineLoading, AiOutlinePlus } from "react-icons/ai";
 import Todo from "@/components/todo/Todo";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/connection/firebaseConfig";
@@ -21,18 +21,27 @@ const style = {
 function ClientApp() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchTodos() {
+  async function fetchTodos() {
+    try {
+      setLoading(true);
       const snapshot = await getDocs(collection(db, "todos"));
       const todos = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setTodos(todos);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
+  }
+  useEffect(() => {
     fetchTodos();
-  });
+  }, []);
 
   // Create a new todo via API
   const createTodo = async (e) => {
@@ -97,14 +106,26 @@ function ClientApp() {
           </button>
         </form>
         <ul>
-          {todos.map((todo, index) => (
-            <Todo
-              key={index}
-              todo={todo}
-              toggleComplete={toggleComplete}
-              deleteTodo={deleteTodo}
-            />
-          ))}
+          {loading ? (
+            <>
+              <div className="w-full h-[300px] my-5 flex items-center justify-center">
+                {" "}
+                <AiOutlineLoading className="text-5xl text-green-500" />
+              </div>{" "}
+            </>
+          ) : (
+            <>
+              {" "}
+              {todos.map((todo, index) => (
+                <Todo
+                  key={index}
+                  todo={todo}
+                  toggleComplete={toggleComplete}
+                  deleteTodo={deleteTodo}
+                />
+              ))}
+            </>
+          )}
         </ul>
         {todos.length > 0 && (
           <p className={style.count}>{`You have ${todos.length} todos`}</p>
