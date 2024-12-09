@@ -1,9 +1,11 @@
 // components/ClientApp.js
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import Todo from "@/components/todo/Todo";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/connection/firebaseConfig";
 
 // styles for TodoClient
 const style = {
@@ -16,9 +18,21 @@ const style = {
   count: `text-center p-2`,
 };
 
-function ClientApp({ initialTodos }) {
-  const [todos, setTodos] = useState(initialTodos);
+function ClientApp() {
+  const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    async function fetchTodos() {
+      const snapshot = await getDocs(collection(db, "todos"));
+      const todos = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setTodos(todos);
+    }
+    fetchTodos();
+  });
 
   // Create a new todo via API
   const createTodo = async (e) => {

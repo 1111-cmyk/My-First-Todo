@@ -17,5 +17,6 @@ export default async function TodosPage() {
   const todos = await fetchTodos();
 
   // Pass to Todo-Client Component
-  return <TodoClient initialTodos={todos} />;
+  // return <TodoClient initialTodos={todos} />;
+  return <TodoClient />;
 }
